@@ -7,5 +7,11 @@ module.exports = {
     config.resolve.alias
       .set('@', resolve('./src'))
       .set('components', resolve('./src/components'))
+      .set('assets', resolve('./src/assets'))
+      .set('common', resolve('./src/common'))
+      .set('network', resolve('./src/network'))
+      .set('router', resolve('./src/router'))
+      .set('store', resolve('./src/store'))
+      .set('views', resolve('./src/views'))
   }
 }
