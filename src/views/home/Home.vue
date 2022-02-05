@@ -76,7 +76,6 @@
       },
       getHomeMultidata(){
         getHomeMultidata().then(res => {
-          console.log(res)
           this.banners = res.data.data.banner.list;
           this.recommends = res.data.data.recommend.list;
         })
@@ -86,7 +85,6 @@
         getHomeGoods(type,page).then(res => {
           this.goods[type].list.push(...res.data.data.list)
           this.goods[type].page += 1
-          console.log(res);
         })
       }
     }
