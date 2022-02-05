@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-item">
+  <div class="goods-item" @click="itemClick">
     <img :src="goodsItem.show.img" alt="">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
@@ -19,6 +19,11 @@
           return []
         }
       }
+    },
+    methods:{
+      itemClick(){
+        this.$router.push('/detail')
+      }
     }
   }
 </script>
@@ -33,7 +38,7 @@
   }
 
   .goods-item img {
-    width: 100%;
+    width: 100%; 
     border-radius: 5px;
   }
 
