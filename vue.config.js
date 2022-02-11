@@ -13,5 +13,5 @@ module.exports = {
       .set('router', resolve('./src/router'))
       .set('store', resolve('./src/store'))
       .set('views', resolve('./src/views'))
-  }
+  },
 }
