@@ -1,12 +1,19 @@
 <template>
   <div id="detail">
-    <div class="navbar"><detail-nav-bar/></div>
+    <ul>
+      <li v-for="item in $store.state.cartList" :key="item.title">
+        {{item}}
+      </li>
+    </ul>
+    <div class="navbar"><detail-nav-bar @titleClick="titleClick"/></div>
     <detail-swiper :top-images="topImages"/>
     <detail-base-info :goods="goods"/>
     <detail-shop-info :shop="shop"/>
     <detail-goods-info :detail-info="detailInfo"/>
     <detail-param-info :param-info="paramInfo"/>
     <detail-comment-info :comment-info="commentInfo"/>
+    <goods-list :goods="recommendList"/>
+    <detail-bottom-bar @addCart="addToCart"/>
   </div>
 </template>
 
@@ -18,8 +25,11 @@
   import DetailGoodsInfo from './childComps/DetailGoodsInfo'
   import DetailParamInfo from './childComps/DetailParamInfo'
   import DetailCommentInfo from './childComps/DetailCommentInfo'
+  import DetailBottomBar from './childComps/DetailBottomBar'
 
-  import {getDetail,Goods,Shop,GoodsParam} from "@/network/detail"
+  import GoodsList from '@/components/content/goods/GoodsList'
+
+  import {getDetail,Goods,Shop,GoodsParam,getRecommend} from "@/network/detail"
   export default {
     name:'Detail',
     components:{
@@ -29,7 +39,9 @@
       DetailShopInfo,
       DetailGoodsInfo,
       DetailParamInfo,
-      DetailCommentInfo
+      DetailCommentInfo,
+      GoodsList,
+      DetailBottomBar
     },
     data() {
       return {
@@ -39,7 +51,8 @@
         shop:{},
         detailInfo:{},
         paramInfo:{},
-        commentInfo:{}
+        commentInfo:{},
+        recommendList:[]
       }
     },
     created() {
@@ -70,7 +83,30 @@
           this.commentInfo=data.rate.list[0]
         }
       })
+
+      //请求推荐数据
+      getRecommend().then(res=>{
+        this.recommendList=res.data.data.list
+      })
     },
+    methods:{
+      //点击导航滑动到指定部分
+      titleClick(index){
+        console.log(index)
+      },
+      addToCart(){
+        // 1.创建对象
+        const product = {}
+        // 2.对象信息
+        product.iid = this.iid;
+        product.imgURL = this.topImages[0]
+        product.title = this.goods.title
+        product.desc = this.goods.desc;
+        product.newPrice = this.goods.nowPrice;
+        // 3.添加到Store中
+        this.$store.commit('addCart', product)
+      }
+    }
   }
 </script>
 
