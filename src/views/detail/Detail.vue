@@ -1,10 +1,5 @@
 <template>
   <div id="detail">
-    <ul>
-      <li v-for="item in $store.state.cartList" :key="item.title">
-        {{item}}
-      </li>
-    </ul>
     <div class="navbar"><detail-nav-bar @titleClick="titleClick"/></div>
     <detail-swiper :top-images="topImages"/>
     <detail-base-info :goods="goods"/>
