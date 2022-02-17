@@ -76,6 +76,7 @@
         //6.获取评论信息
         if(data.rate.cRate!==0){
           this.commentInfo=data.rate.list[0]
+          
         }
       })
 

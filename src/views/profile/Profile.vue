@@ -2,6 +2,9 @@
   <div>
     <h2>个人</h2>
     <button @click="getProfileMultidata">获取数据</button>
+    <ul>
+      <li>{{user_imfor}}</li>
+    </ul>
   </div>
 </template>
 
@@ -12,7 +15,9 @@
     name: "Profile",
     data(){
       return {
-        user_imfor:[]
+        user_imfor:{
+          type:Object
+        }
       }
     },
     components:{
@@ -21,8 +26,8 @@
     methods:{
       getProfileMultidata(){
         getProfileMultidata().then(res => {
-          this.user_imfor = res.data
-          console.log(this.user_imfor);
+          console.log(res);
+          this.user_imfor = res.data.data
         })
       }
     }
