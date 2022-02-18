@@ -12,6 +12,16 @@ const mutations = {
       info.checked = true
       state.cartList.push(info)
     }
+  },
+  GET_USER: (state, data) => {
+    // 把用户名存起来
+    state.user = data
+    window.sessionStorage.setItem('user', data)
+  },
+  LOGOUT: (state) => {
+    // 登出的时候要清除用户名
+    state.user = null
+    window.sessionStorage.removeItem('user')
   }
 }
 

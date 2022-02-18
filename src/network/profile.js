@@ -1,7 +1,11 @@
 import { request1 } from "./request";
 
-export function getProfileMultidata(){
+export function getProfileMultidata(username,password){
   return request1({
-    url:'/login'
+    url:'/login',
+    data:{
+      username,
+      password
+    }
   })
 }
