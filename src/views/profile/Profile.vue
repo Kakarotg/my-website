@@ -11,16 +11,14 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="getProfileMultidata">登录</el-button>
+          <el-button @click="RegisterClick">立即注册</el-button>
         </el-form-item>
       </el-form>
     </div>
     <div v-else>
       <h2>您好，{{username}}</h2>
+      <el-button type="primary" @click="logOut">注销</el-button>
     </div>
-    
-    <ul>
-      <li>{{user_imfor}}</li>
-    </ul>
   </div>
 </template>
 
@@ -47,6 +45,7 @@
       
     },
     methods:{
+      //登录
       getProfileMultidata(){
         getProfileMultidata(this.username,this.password).then(res => {
           console.log(res);
@@ -63,10 +62,17 @@
             });
           }
           console.log(res);
-          
-          
-          
         })
+      },
+      //注销
+      logOut(){
+        this.isLogin = false
+        this.username=''
+        this.password=''
+      },
+      //注册跳转
+      RegisterClick() {
+        this.$router.replace("/profile/childComps")
       }
       /* login(){
             this.$axios.post(this.HOST+'/login',{username:this.username,password:this.password})

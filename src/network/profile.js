@@ -1,6 +1,6 @@
 import { request1 } from "./request";
 
-export function getProfileMultidata(username,password){
+function getProfileMultidata(username,password){
   return request1({
     url:'/login',
     data:{
@@ -9,3 +9,14 @@ export function getProfileMultidata(username,password){
     }
   })
 }
+function Register(username,password){
+  return request1({
+    url:'/regUser',
+    data:{
+      username,
+      password
+    }
+  })
+}
+
+export {getProfileMultidata,Register}
